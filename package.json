@@ -1,19 +1,23 @@
 {
   "name": "clientify",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/pkozlowski-opensource/clientify.git"
   },
-  "author": "",
-  "license": "BSD-2-Clause",
+  "author": "pkozlowski.opensource@gmail.com",
   "bugs": {
     "url": "https://github.com/pkozlowski-opensource/clientify/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "bin": {
+    "clientify": "./bin/clientify.js"
   },
   "dependencies": {
     "semver": "~2.2.1",
