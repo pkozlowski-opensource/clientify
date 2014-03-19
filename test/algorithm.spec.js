@@ -217,7 +217,7 @@ describe('tree flattening', function () {
       }).to.throw('None of "angularjs" version satisfies all the constraints: ()');
     });
 
-    it('should reprot pacakges not existing in a repository', function () {
+    it('should report pacakges not existing in a repository', function () {
       expect(function () {
         testTree({'non-existing': '0.0.1'});
       }).to.throw('Package "non-existing" does not exist');
