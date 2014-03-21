@@ -29,6 +29,7 @@
   "devDependencies": {
     "gulp": "~3.5.5",
     "gulp-mocha": "~0.4.1",
-    "chai": "~1.9.0"
+    "chai": "~1.9.0",
+    "gulp-util": "~2.2.14"
   }
 }

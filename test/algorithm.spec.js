@@ -1,7 +1,7 @@
 var _ = require("lodash");
 var semver = require('semver');
 var expect = require('chai').expect;
-var foo = require("../lib/foo");
+var foo = require("../lib/algorithm");
 
 describe('tree flattening', function () {
 
