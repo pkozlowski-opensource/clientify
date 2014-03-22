@@ -18,22 +18,22 @@ describe('tree flattening', function () {
       '1.2.13': {}
     },
     datepicker: {
-      '0.0.0': { dependencies: { angularjs: '<=1.0.10', jquery: '1.10.1'}},
-      '0.0.1': { dependencies: { angularjs: '<=1.2.12', jquery: '1.10.1'}}
+      '0.0.0': { angularjs: '<=1.0.10', jquery: '1.10.1'},
+      '0.0.1': { angularjs: '<=1.2.12', jquery: '1.10.1'}
     },
     timepicker: {
-      '0.0.1': { dependencies: { angularjs: '>=1.2.10'}},
-      '0.0.2': { dependencies: { angularjs: '1.2.13'}}
+      '0.0.1': { angularjs: '>=1.2.10'},
+      '0.0.2': { angularjs: '1.2.13'}
     },
     adminmodule: {
-      '0.1.0': { dependencies: { datepicker: '>=0.0.0' }},
-      '0.2.0': { dependencies: { datepicker: '>=0.0.0' }, angularjs: '1.2.11'}
+      '0.1.0': { datepicker: '>=0.0.0' },
+      '0.2.0': { datepicker: '>=0.0.0', angularjs: '>=1.2.11'}
     },
     publicmodule: {
-      '0.1.0': { dependencies: { timepicker: '>=0.0.0' }}
+      '0.1.0': { timepicker: '>=0.0.0' }
     },
     searchmodule: {
-      '0.0.1': { dependencies: {datepicker: '0.0.0'}}
+      '0.0.1': {datepicker: '0.0.0'}
     }
   };
 
@@ -48,11 +48,15 @@ describe('tree flattening', function () {
       version = version || this.latest(name);
 
       if (packages[name]) {
-        var pkg = packages[name][version];
+        var pkg = {};
 
         pkg.name = name;
         pkg.version = version;
         pkg.versions = _.keys(packages[name]);
+
+        if (_.keys(packages[name][version]).length) {
+          pkg.dependencies = packages[name][version];
+        }
 
         return pkg;
       } else {
