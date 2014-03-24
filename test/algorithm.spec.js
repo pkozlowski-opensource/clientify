@@ -196,7 +196,7 @@ describe('tree flattening', function () {
 
   describe('error conditions', function () {
 
-    it('should report reference to range for which there are no versions in the repository', function () {
+    it.skip('should report reference to range for which there are no versions in the repository', function () {
       expect(function () {
         testTree({ timepicker: '50.0.1'});
       }, {}).to.throw(/There is no version of "timepicker" in the repository that would satisfy "50.0.1" constraint./);
@@ -208,7 +208,7 @@ describe('tree flattening', function () {
             datepicker: '0.0.0',
             timepicker: '0.0.1'}
         );
-      }).to.throw('None of "angularjs" version satisfies all the constraints: ()');
+      }).to.throw('None of "angularjs" version satisfies all the constraints: (1.0.10, >=1.2.10)');
     });
 
     it('should detect conflicts in a tree with many levels', function () {
@@ -218,7 +218,7 @@ describe('tree flattening', function () {
             publicmodule: '0.1.0'
           }
         );
-      }).to.throw('None of "angularjs" version satisfies all the constraints: ()');
+      }).to.throw('None of "angularjs" version satisfies all the constraints: (1.0.10, >=1.2.10)');
     });
 
     it('should report pacakges not existing in a repository', function () {
@@ -227,10 +227,6 @@ describe('tree flattening', function () {
       }).to.throw('Package "non-existing" does not exist');
     });
 
-    //test exposing the situation in the exception
   });
-
-  // remove code duplication while dealing with intersections
-  // the algorithm is totally not optimized etc...
 
 });
