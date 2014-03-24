@@ -1,4 +1,5 @@
 var _ = require("lodash");
+var q = require('q');
 var semver = require('semver');
 var expect = require('chai').expect;
 var npmFlatten = require("../lib/npmFlatten");
@@ -55,21 +56,26 @@ describe('tree flattening', function () {
         pkg.versions = packages[name];
         pkg.dependencies = pkg.versions[version].dependencies || {};
 
-        return pkg;
+        return q.when(pkg);
       } else {
-        throw new Error('Package "' + name + '" does not exist');
+        return q.reject('Package "' + name + '" does not exist');
       }
     }
   };
 
   function testTree(rootPackageDeps, expectedOut) {
-    expect(npmFlatten.resolvePackages(repository, rootPackageDeps)).to.deep.equal(expectedOut);
+
+    npmFlatten.resolvePackages(repository, rootPackageDeps).then(function(result){
+      expect(result).to.deep.equal(expectedOut);
+    }, function(err) {
+      throw err;
+    }).done();
   }
 
 
   describe('happy path', function () {
 
-    it('should return empty list of packages to install for a package with no dependencies', function () {
+    it.only('should return empty list of packages to install for a package with no dependencies', function () {
       testTree({}, {});
     });
 
@@ -189,7 +195,7 @@ describe('tree flattening', function () {
 
   describe('error conditions', function () {
 
-    it.skip('should report reference to range for which there are no versions in the repository', function () {
+    it('should report reference to range for which there are no versions in the repository', function () {
       expect(function () {
         testTree({ timepicker: '50.0.1'});
       }, {}).to.throw(/There is no version of "timepicker" in the repository that would satisfy "50.0.1" constraint./);
