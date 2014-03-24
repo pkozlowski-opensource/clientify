@@ -66,7 +66,7 @@ describe('tree flattening', function () {
   };
 
   function testTree(rootPackageDeps, expectedOut) {
-    expect(foo.doFlatten(repository, {
+    expect(foo.resolvePackages(repository, {
       name: 'app',
       version: '1.0.0',
       dependencies: rootPackageDeps
