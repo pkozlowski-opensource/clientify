@@ -1,7 +1,7 @@
 var _ = require("lodash");
 var semver = require('semver');
 var expect = require('chai').expect;
-var foo = require("../lib/algorithm");
+var npmFlatten = require("../lib/npmFlatten");
 
 describe('tree flattening', function () {
 
@@ -63,7 +63,7 @@ describe('tree flattening', function () {
   };
 
   function testTree(rootPackageDeps, expectedOut) {
-    expect(foo.resolvePackages(repository, rootPackageDeps)).to.deep.equal(expectedOut);
+    expect(npmFlatten.resolvePackages(repository, rootPackageDeps)).to.deep.equal(expectedOut);
   }
 
 
@@ -156,7 +156,7 @@ describe('tree flattening', function () {
       });
     });
 
-    it.only('should properly resolve deeper trees with constraints anywhere in the tree', function () {
+    it('should properly resolve deeper trees with constraints anywhere in the tree', function () {
       testTree({
         adminmodule: '0.x.0',
         publicmodule: '0.1.0'
