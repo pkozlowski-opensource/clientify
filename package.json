@@ -16,14 +16,10 @@
       "type": "MIT"
     }
   ],
-  "bin": {
-    "clientify": "./bin/clientify.js"
-  },
   "dependencies": {
     "semver": "~2.2.1",
     "read-package-json": "~1.1.7",
     "q": "~1.0.0",
-    "wrench": "~1.5.8",
     "lodash": "~2.4.1"
   },
   "devDependencies": {
